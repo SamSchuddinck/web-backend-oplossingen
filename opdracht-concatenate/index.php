@@ -6,7 +6,7 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Opdracht Concatenate</title>
 </head>
 <body>
 <p><?php echo $volNaam ?></p>
