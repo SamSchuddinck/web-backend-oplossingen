@@ -1,5 +1,5 @@
 <?php
-	$seconden = 34567890;
+	$seconden = 221108521;
 
 	$minuut = 60;
 	$uur = $minuut*60;
