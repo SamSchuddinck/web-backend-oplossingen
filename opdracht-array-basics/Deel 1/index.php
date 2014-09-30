@@ -23,8 +23,8 @@
 	<title>Opdracht Arrays Basics</title>
 </head>
 <body>
-	<pre>Array dieren:<?php print_r($arrayDieren) ?></pre>
-	<pre>Array dieren 2:<?php print_r($arrayDieren2) ?></pre>
-	<pre>Array voertuigen:<?php print_r($arrayVoertuigen) ?></pre>
+	<p>Array dieren:<?php var_dump($arrayDieren) ?></p>
+	<p>Array dieren 2:<?php var_dump($arrayDieren2) ?></p>
+	<p>Array voertuigen:<?php var_dump($arrayVoertuigen) ?></p>
 </body>
 </html>
