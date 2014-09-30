@@ -35,7 +35,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Conditional Statements - Deel 1</title>
+	<title>Conditional Statements - Deel 2</title>
 </head>
 <body>
 <p>Het getal is <?php echo $getal; ?> dit is dus <?php echo $dag; ?>.</p>
