@@ -8,7 +8,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Opdracht String Extra Functions: Deel 2</title>
+	<title>Opdracht String Extra Functions: Deel 3</title>
 </head>
 <body>
 <p>Vervangen:<?php echo $langsteWoord; ?></p>
