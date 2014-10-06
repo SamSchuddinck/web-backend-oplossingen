@@ -32,9 +32,9 @@
     	<title>Deel1</title>
     </head>
     <body>
-		<p>Getallen1: <?= $getallenReeks ?></p>
+		<p>Getallen1: <?= $getallen ?></p>
 
-		<p>Getallen2: <?= $getallenReeks2 ?></p>
+		<p>Getallen2: <?= $getallen2 ?></p>
 
     </body>
 </html>
