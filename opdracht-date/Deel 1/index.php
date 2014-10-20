@@ -2,7 +2,7 @@
 
 	$timeStamp	=	mktime( 22, 35, 25, 01, 21, 1904 );
 
-	$date	=	strftime( '%d %B %Y, %H:%M:%S %p', $timestamp );
+	$date	=	strftime( '%d %B %Y, %H:%M:%S %p', $timeStamp );
 
 ?>
 
