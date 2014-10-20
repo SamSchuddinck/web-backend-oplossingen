@@ -29,7 +29,7 @@
 </head>
 <body class="php-inleiding">
 
-	<h1>Oplossing post: deel1</h1>
+	<h1>Opdracht Post</h1>
 
 	<h2>Log in</h2>
 
