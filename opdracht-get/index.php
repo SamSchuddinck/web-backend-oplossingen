@@ -44,12 +44,10 @@ Volgens een persbericht van de brandweer was de dame op zoek naar nog meer drank
 	$singleArticle	=	false;
 	$wrongArticle	=	false;
 
-	// Controleren of de get-variabele ID geset is om een individueel article op te halen
 	if ( isset ( $_GET['id'] ) )
 	{
 		$id = $_GET['id'];
 
-		// Controleren of de opgevraagde key (=id) bestaat in de array $articles
 		if ( array_key_exists( $id , $articles ) )
 		{
 			$articles 			= 	array( $articles[$id] );
@@ -70,7 +68,6 @@ Volgens een persbericht van de brandweer was de dame op zoek naar nog meer drank
 			font-family:"Segoe UI";
 			color:#423f37;
 		}
-
 		.container
 		{
 			width:	1024px;
@@ -107,8 +104,6 @@ Volgens een persbericht van de brandweer was de dame op zoek naar nog meer drank
 			float:right;
 			margin-left: 16px;
 		}
-
-
 	</style>
 </head>
 <body>
