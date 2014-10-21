@@ -1,0 +1,9 @@
+<?php foreach ($artikkels as $key => $artikkel): ?>
+<article>
+	<h3><?= $artikkel['titel'] ?></h3>
+	<p><?= $artikkel['tekst'] ?></p>
+	<?php foreach ($artikkel['tags'] as $tag): ?>
+	<p><u> <?= $tag ?></u></p>
+	<?php endforeach; ?>
+</article>
+<?php endforeach; ?>
