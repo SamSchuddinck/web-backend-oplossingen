@@ -61,4 +61,9 @@ a:active,a:visited,a:link
 	background-color: orange;
 	text-decoration: none;
 }
+.wrong
+{
+	color:red;
+	font-weight: bold;
+}
 

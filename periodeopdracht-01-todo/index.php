@@ -5,6 +5,15 @@
 		if($_POST['description'] != '')
 		{
 			$_SESSION['todos'][] = $_POST['description'];
+			if(isset($message) && $message != '')
+			{
+				$wrong = '';
+			}
+
+		}
+		else
+		{
+			$wrong = 'Het veld beschrijving kan niet leeg zijn!';
 		}
 	}
 	if(isset($_GET['done']))
@@ -82,6 +91,9 @@
 		<?php endif; ?>
 	<?php endif; ?>
 	<h2>Todo toevoegen</h2>
+	<?php if(isset($wrong) && $wrong != '') : ?>
+		<p class="wrong"><?= $wrong ?></p>
+	<?php endif ?>
 	<form action="index.php" method="post">
 		<label for="description">Beschrijving:</label>
 		<input name="description" type="text"><br>
