@@ -3,7 +3,7 @@
 
 	$melding	=	false;
 
-	$brouwer	=	false;
+	$selectedBrouwer	=	false;
 
 	try
 	{
@@ -26,7 +26,7 @@
 
 		if ( isset( $_GET[ 'brouwernr' ] ) )
 		{
-			$brouwer	=	$_GET[ 'brouwernr' ];
+			$selectedBrouwer	=	$_GET[ 'brouwernr' ];
 
 			$bierenQuery	=	'SELECT bieren.naam
 									FROM bieren 
@@ -110,7 +110,7 @@
 		
 		<select name="brouwernr">
 			<?php foreach ($brouwers as $key => $brouwer): ?>
-				<option value="<?= $brouwer['brouwernr'] ?>" <?= ( $brouwer === $brouwer['brouwernr'] ) ? 'selected' : '' ?>><?= $brouwer['brnaam'] ?></option>
+				<option value="<?= $brouwer['brouwernr'] ?>" <?= ( $selectedBrouwer === $brouwer['brouwernr'] ) ? 'selected' : '' ?>><?= $brouwer['brnaam'] ?></option>
 			<?php endforeach ?>
 		</select>
 		<input type="submit" value="Geef mij alle bieren van deze brouwerij">
