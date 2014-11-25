@@ -2,10 +2,17 @@
 
 
 	$melding	=	false;
+	$deleteConfirm = false;
+	$deleteId = false;
 	try
 	{
 		$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', 'root' ); // Connectie maken
 
+		if(isset($_POST['delete_confirm']))
+		{
+			$deleteConfirm = true;
+			$deleteId = $_POST['delete_confirm'];
+		}
 		if ( isset( $_POST['delete'] ) )
 		{
 			$deleteQuery = 'DELETE FROM brouwers WHERE brouwernr = :brouwernr';
@@ -70,12 +77,16 @@
 			{
 				color:red;
 			}
-
+			.to-delete
+			{
+				background-color: red !important;
+				color:white;
+				opacity: 0.7;
+			}
 			tr:nth-child(even)
 			{
 				background-color:lightgrey;
 			}
-
 			.delete-button
 			{
 				background-color	:	transparent;
@@ -94,6 +105,13 @@
 			<?= $melding['text'] ?>
 		</p>
 	<?php endif ?>
+	<?php if($deleteConfirm) :?>
+		<p>Weet u zeker dat u deze rij wilt verwijderen ?</p>
+		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+			<button type="submit" name="delete" value="<?= $deleteId ?>">Ja</button>
+			<button type="submit">Nee</button>
+		</form>
+	<?php endif ?>
 	
 	<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
 		<table>
@@ -109,12 +127,12 @@
 
 			<tbody>
 				<?php foreach ($brouwerData as $key => $brouwer) :?>
-					<tr>
+					<tr class="<?= ($brouwer['brouwernr'] == $deleteId)? 'to-delete' : ''; ?>">
 						<?php foreach ($brouwer as $key => $value) : ?>
 							<td><?= $value ?></td>
 						<?php endforeach ?>
 						<td>
-							<button type="submit" name="delete" value="<?= $brouwer['brouwernr'] ?>" class="delete-button">
+							<button type="submit" name="delete_confirm" value="<?= $brouwer['brouwernr'] ?>" class="delete-button">
 								<img src="../img/icon-delete.png" alt="Delete button">
 							</button>
 						</td>
