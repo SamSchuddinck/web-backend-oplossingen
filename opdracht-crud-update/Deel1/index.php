@@ -4,9 +4,10 @@
 	$melding	=	false;
 	$deleteConfirm = false;
 	$deleteId = false;
+	$editBrouwer = false;
 	try
 	{
-		$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', 'root' ); // Connectie maken
+		$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '' ); // Connectie maken
 
 		if(isset($_POST['delete_confirm']))
 		{
@@ -33,6 +34,59 @@
 				$melding['text'] = 'De datarij kon niet verwijderd worden. Probeer opnieuw.';
 			}
 		}
+		// EDIT
+		if(isset($_POST['edit']))
+		{
+			$editQuery = 'SELECT * FROM brouwers WHERE brouwernr = :brouwernr';
+			$editGetStatement = $db->prepare($editQuery);
+			$editGetStatement->bindParam(':brouwernr',$_POST['edit']);
+			$editGetSuccess = $editGetStatement->execute();
+
+			if($editGetSuccess)
+			{
+				// Data ophalen voor te updaten brouwer
+				$editBrouwer = $editGetStatement->fetch(PDO::FETCH_ASSOC);
+			}
+			else
+			{
+				$melding['type'] = 'error';
+				$melding['text'] = 'Deze brouwerij werd niet gevonden.';
+			}
+		}
+
+		if(isset($_POST['wijzigen']))
+		{
+			$wijzigQuery = 'UPDATE brouwers
+									SET brnaam 			=	:brnaam,
+										adres			=	:adres,
+										postcode		=	:postcode,
+										gemeente		=	:gemeente,
+										omzet			=	:omzet
+									WHERE brouwernr		= :brouwernr
+									LIMIT 1';
+			$wijzigStatement = $db->prepare($wijzigQuery);
+
+			$wijzigStatement->bindParam(':brnaam',$_POST['brnaam']);
+			$wijzigStatement->bindParam(':adres',$_POST['adres']);
+			$wijzigStatement->bindParam(':postcode',$_POST['postcode']);
+			$wijzigStatement->bindParam(':gemeente',$_POST['gemeente']);
+			$wijzigStatement->bindParam(':omzet',$_POST['omzet']);
+			$wijzigStatement->bindParam(':brouwernr',$_POST['wijzigen']);
+
+			$wijzigSuccess = $wijzigStatement->execute();
+			if($wijzigSuccess)
+			{
+				$melding['type'] = 'success';
+				$melding['text'] = 'De brouwerij '.$_POST['brnaam'].' werd succesvol gewijzigd';
+			}
+			else
+			{
+				$melding['type'] = 'error';
+				$melding['text'] = 'Wijzigen mislukt probeer opnieuw';
+			}
+		}
+
+		//Data ophalen voor tabel
 
 		$brouwersQuery = 'SELECT * FROM brouwers';
 
@@ -66,7 +120,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Opdracht CRUD Delete 2</title>
+		<title>Opdracht CRUD Update 1</title>
 		<style>
 			.success
 			{
@@ -98,13 +152,43 @@
 	</head>
 <body>
 
-	<h1>Opdracht CRUD Delete 2</h1>
+	<h1>Opdracht CRUD Update 1</h1>
+	<hr>
 
 	<?php if ( $melding ): ?>
 		<p class="<?= $melding[ "type" ] ?>">
 			<?= $melding['text'] ?>
 		</p>
 	<?php endif ?>
+	<?php if($editBrouwer) :?>
+		<h1><?= $editBrouwer['brnaam'].' (#'.$editBrouwer['brouwernr'].') wijzigen' ?></h1>
+		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+			<ul>
+				<li>
+					<label>Brouwernaam</label>
+					<input type="text" name="brnaam" value="<?= $editBrouwer['brnaam'] ?>"></input>
+				</li>
+				<li>
+					<label>Adres</label>
+					<input type="text" name="adres" value="<?= $editBrouwer['adres'] ?>"></input>
+				</li>
+				<li>
+					<label>Postcode</label>
+					<input type="text" name="postcode" value="<?= $editBrouwer['postcode'] ?>"></input>
+				</li>
+				<li>
+					<label>Gemeente</label>
+					<input type="text" name="gemeente" value="<?= $editBrouwer['gemeente'] ?>"></input>
+				</li>
+				<li>
+					<label>Omzet</label>
+					<input type="text" name="omzet" value="<?= $editBrouwer['omzet'] ?>"></input>
+				</li>
+			</ul>
+			<button type"submit" name="wijzigen" value="<?= $editBrouwer['brouwernr'] ?>">Wijzigen</button>
+		</form>
+	<?php endif ?>
+
 	<?php if($deleteConfirm) :?>
 		<p>Weet u zeker dat u deze rij wilt verwijderen ?</p>
 		<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
@@ -134,6 +218,11 @@
 						<td>
 							<button type="submit" name="delete_confirm" value="<?= $brouwer['brouwernr'] ?>" class="delete-button">
 								<img src="../img/icon-delete.png" alt="Delete button">
+							</button>
+						</td>
+						<td>
+							<button type="submit" name="edit" value="<?= $brouwer['brouwernr'] ?>" class="delete-button">
+								<img src="../img/icon-edit.png" alt="Delete button">
 							</button>
 						</td>
 					</tr>

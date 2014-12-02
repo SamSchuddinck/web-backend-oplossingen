@@ -3,7 +3,7 @@
 	if(isset($_POST['submit']))
 	{
 		try {
-			$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', 'root' ); // Paswoord root op laptop leeg op desktop
+			$db = new PDO('mysql:host=localhost;dbname=bieren', 'root', '' ); // Paswoord root op laptop leeg op desktop
 
 			$insertBrouwerQuery = 'INSERT INTO brouwers
 				(
