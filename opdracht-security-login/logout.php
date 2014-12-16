@@ -11,8 +11,8 @@
 
 	if ( $logout )
 	{
-		$logoutMessage	=	new Message('success', 'Tot de volgende keer!');
-		header( 'location: phpoefening-029-a-login-form.php' );
+		$logoutMessage	=	new Notification('success', 'Tot de volgende keer!');
+		header( 'location: login.php' );
 	}
 
 ?>

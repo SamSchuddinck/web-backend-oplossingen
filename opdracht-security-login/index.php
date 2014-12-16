@@ -16,6 +16,11 @@
 		$password = $_SESSION['register']['password'];
 	}
 
+	if(isset($_COOKIE['authenticated']))
+	{
+		header('location: dashboard.php');
+	}
+
 	
  ?>
 <!doctype html>

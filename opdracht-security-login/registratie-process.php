@@ -6,7 +6,10 @@
 	{
 		require_once( './classes/'.$classname . '.php' );
 	}
-
+	if(!isset($_POST['generatePassword']) || !isset($_POST['register']))
+	{
+		header( 'location: login.php');
+	}
 	if(isset($_POST['generatePassword']))
 	{
 		$_SESSION['register']['email'] = $_POST['email'];
