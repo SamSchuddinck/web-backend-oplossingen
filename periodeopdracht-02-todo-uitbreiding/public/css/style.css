@@ -1,0 +1,33 @@
+a.green
+{
+	color:#5cb85c;
+}
+a.red
+{
+	color:#d9534f;
+}
+a.orange
+{
+	color:#f0ad4e
+}
+
+a.green:hover
+{
+	color:#438443;
+}
+a.red:hover
+{
+	color: #9B3835;
+}
+a.orange:hover
+{
+	color:#C38D40;
+}
+.alert-success
+{
+	background-color: #9BE09B !important;
+}
+.alert-danger
+{
+	background-color: #EC716D !important;
+}

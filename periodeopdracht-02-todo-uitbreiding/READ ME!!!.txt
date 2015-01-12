@@ -1,0 +1,9 @@
+Beste,
+Als extra heb ik registraties met email validatie gedaan.
+Met andere woorden bij het registreren wordt een mail verstuurd met activatie link voor het account.
+Nu om die mail te versturen heb ik de Mail Server van GMail gebruikt maar om veiligheids redenen haal ik mijn login gegevens er wel uit alvorens ik dit comit.
+
+Dus om de App volledig werkende te maken moet je het config bestand voor de mail(app/config/mail.php) wel aanpassen en dus jou login gegevens voor gmail ingeven onder username en wachtwoord.
+Ik veronderstel dat u wel weet wat ik bedoel...
+
+! Ik heb de app ook geschreven voor een virtual host of om ineens op een website te zetten en dus heb runnen vanuit folders zal niet gaan. (Links kloppen dan niet)
