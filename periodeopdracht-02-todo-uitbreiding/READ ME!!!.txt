@@ -7,3 +7,4 @@ Dus om de App volledig werkende te maken moet je het config bestand voor de mail
 Ik veronderstel dat u wel weet wat ik bedoel...
 
 ! Ik heb de app ook geschreven voor een virtual host of om ineens op een website te zetten en dus heb runnen vanuit folders zal niet gaan. (Links kloppen dan niet)
+U zal mijn project dus vanuit een vhost moeten testen!

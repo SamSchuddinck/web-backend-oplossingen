@@ -29,5 +29,6 @@ a.orange:hover
 }
 .alert-danger
 {
+	color: #843736 !important;
 	background-color: #EC716D !important;
 }

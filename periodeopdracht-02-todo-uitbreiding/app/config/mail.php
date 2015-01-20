@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'jouw wachtwoord',
+	'password' => 'uw wachtwoord',
 
 	/*
 	|--------------------------------------------------------------------------

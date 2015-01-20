@@ -48,7 +48,12 @@ Route::filter('auth', function()
 	}
 });
 
-
+Route::filter('auth.check',function(){
+	if(Auth::user())
+	{
+		return Redirect::to('/')->with('fail','Je bent al ingelogd!');
+	}
+});
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

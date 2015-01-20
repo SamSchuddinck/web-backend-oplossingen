@@ -14,7 +14,12 @@
 Route::get('/', 'HomeController@getIndex');
 Route::get('/Registreer','HomeController@getRegistreer');
 Route::get('Activeer/{code}','UserController@getActivate');
-Route::get('/Login','HomeController@getLogin');
+
+// Als user ingelogd is kan niet naar login pagina gaan
+Route::group(array('before' => 'auth.check'),function(){
+	Route::get('/Login','HomeController@getLogin');
+});
+
 
 /* Protection against cross site request*/
 Route::group(array('before' => 'csrf'),function(){
@@ -28,7 +33,8 @@ Route::group(array('before' => 'auth'),function(){
 	Route::get('Todos/Done/{todoId}','ToDoController@changeToDone');
 	Route::get('Todos/Todo/{todoId}','ToDoController@changeToTodo');
 	Route::get('Todos/Delete/{todoId}','ToDoController@deleteTodo');
-
+	
+	/* Protection against cross site request*/
 	Route::group(array('before' => 'csrf'),function(){
 		Route::post('/Todos','ToDoController@addToDo');
 	});

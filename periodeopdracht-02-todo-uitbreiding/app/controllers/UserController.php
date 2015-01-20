@@ -47,7 +47,7 @@
 					$user = User::where('username',$input['username'])->first();
 					if($user->active == false)
 					{
-						return Redirect::intended('/Login')->with('fail','Dit account is nog niet geactiveerd');
+						return Redirect::intended('/Login')->with('fail','Dit account is nog niet geactiveerd')->withInput();
 					}
 					else
 					{
@@ -57,7 +57,7 @@
 				else
 				{
 					
-					return Redirect::to('/Login')->with('fail','Er bestaat geen gebruiker met deze username');
+					return Redirect::to('/Login')->with('fail','Er bestaat geen gebruiker met deze username')->withInput();
 				}
 
 				$credentials = array(
@@ -69,11 +69,11 @@
 				$remember = (Input::has('remember')) ? true : false;
 				if(Auth::attempt($credentials,$remember))
 				{
-					return Redirect::intended('/')->with('success','Welkom, '.Auth::user()->fname .' '.Auth::user()->lname);
+					return Redirect::to('/')->with('success','Welkom, '.Auth::user()->fname .' '.Auth::user()->lname);
 				}
 				else
 				{
-					return Redirect::to('/Login')->with('fail','Wachtwoord is onjuist.');		
+					return Redirect::to('/Login')->with('fail','Wachtwoord is onjuist.')->withInput();		
 				}
 			}
 			else
@@ -128,9 +128,10 @@
 				$user->salt = $salt;
 				$user->code = str_random(30);
 				$user->active = false;
-
-				
-	            Mail::queue('emails.auth.activate', 
+	
+	            try
+	            {
+	            	Mail::queue('emails.auth.activate', 
 					array(
 						'link' => URL::action('UserController@getActivate',$user->code),
 						'fname'=> $user->fname,
@@ -140,10 +141,16 @@
 						$message->to($user->email,$user->fname.' '.$user->lname);
 						$message->subject('ToDoApp - Activeer Account');
 					});
-	                $user->save();
-	                return Redirect::to('/')
-	                  ->with('success','Je hebt met succes een account aangemaakt! 
-	                Er werd een mail naar je verzonden met een activatie code voor je account te activeren.');  
+	            }
+	            catch(Exception $e)
+	            {
+	            	return Redirect::to('/Registreer')->with('fail','Kon registratie mail niet verzenden!')->withInput();
+	            }
+	            $user->save();
+	            return Redirect::to('/')
+	                ->with('success','Je hebt met succes een account aangemaakt! 
+	               	 Er werd een mail naar je verzonden met een activatie code voor je account te activeren.');  
+	               
 
 			}
 			else
